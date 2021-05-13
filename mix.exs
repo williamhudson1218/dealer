@@ -23,7 +23,9 @@ defmodule Dealer.MixProject do
     [
       {:httpoison, "~> 1.8.0"},
       {:floki, "~> 0.30.1"},
-      {:meeseeks, "~> 0.15.1"}
+      {:meeseeks, "~> 0.15.1"},
+      {:json, "~> 1.4"},
+      {:poison, "~> 3.1"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]

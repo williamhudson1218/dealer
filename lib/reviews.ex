@@ -2,13 +2,28 @@ defmodule Dealer.Reviews do
   import Meeseeks.CSS
   alias Dealer.Review
 
-  def parse_reviews(html_page_list) do
-    IO.puts("+++++++++++++++")
-    Enum.each html_page_list, fn {key, review_list} ->
-      IO.inspect(review_list)
+  def get_reviews do
+    reviews =
+     Enum.map 1..5, fn x ->
+      get_review_html_page(x)
+     end
+     List.flatten(reviews)
+  end
+
+  def get_review_html_page(index) do
+    url = Application.get_env(:dealer, :url)
+    case HTTPoison.get(String.replace(url, "pagex", "page#{index}")) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        reviews =
+          body
+          |> Meeseeks.parse
+          |> Meeseeks.all(css(".review-entry"))
+        end
+  end
+
+  def parse_reviews(review_list) do
       for review <- review_list do
-        #parse_review(review)
-      end
+        parse_review(review)
     end
   end
 
@@ -23,11 +38,11 @@ defmodule Dealer.Reviews do
   end
 
   def parse_username(%Review{html: html} = review) do
-    IO.inspect(html)
     username =
       html
       |> Meeseeks.one(css(".font-18"))
       |> Meeseeks.text
+      |> String.trim_leading("- ")
       %Review{review | username: username}
   end
 
@@ -61,6 +76,7 @@ defmodule Dealer.Reviews do
     date =
       html
       |> Meeseeks.one(css(".review-date"))
+      |> Meeseeks.one(css(".pad-none"))
       |> Meeseeks.text
       %Review{review | date: date}
   end
