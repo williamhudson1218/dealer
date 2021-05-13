@@ -14,7 +14,7 @@ defmodule Dealer.Reviews do
     url = Application.get_env(:dealer, :url)
     case HTTPoison.get(String.replace(url, "pagex", "page#{index}")) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        reviews =
+        _reviews =
           body
           |> Meeseeks.parse
           |> Meeseeks.all(css(".review-entry"))
@@ -67,7 +67,7 @@ defmodule Dealer.Reviews do
       html
       |> Meeseeks.one(css(".rating-static"))
       |> Meeseeks.html
-      {index, count} = :binary.match(ratingHtml, "pull-right")
+      {index, _count} = :binary.match(ratingHtml, "pull-right")
       {rating, _} = Integer.parse(String.slice(ratingHtml, index - 3, 2))
       %Review{review | rating: rating}
   end

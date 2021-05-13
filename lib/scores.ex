@@ -1,6 +1,7 @@
 defmodule Dealer.Scores do
   alias Dealer.Review
 
+  @spec calculate_scores(any) :: list
   def calculate_scores(reviews) do
     for review <- reviews do
       calculate_score(review)
@@ -8,7 +9,6 @@ defmodule Dealer.Scores do
   end
 
   def calculate_score(%Review{} = review) do
-    new_review =
       review
       |> score_rating
       |> score_positive_words
@@ -22,14 +22,15 @@ defmodule Dealer.Scores do
     %Review{review | score: total}
   end
 
+  @spec test_word(binary, binary | [binary] | :binary.cp()) :: boolean
   def test_word(body, word) do
    String.contains?(String.downcase(body), word)
  end
 
   def score_positive_words(%Review{score: score} = review) do
     total =
-    Enum.reduce get_positive_words, 0, fn word, acc ->
-      if test_word(review.body, word), do: acc + 1, else: acc
+    Enum.reduce get_positive_words(), 0, fn word, acc ->
+      if test_word(review.body, word), do: acc + 2, else: acc
     end
 
     %Review{review | score: score + total}
@@ -38,22 +39,21 @@ defmodule Dealer.Scores do
   def get_positive_words() do
     {:ok, body } = File.read("words.json")
     {:ok, json } = Poison.decode(body)
-    words = json["positiveWords"]
+    json["positiveWords"]
   end
 
   def score_negative_words(%Review{score: score} = review) do
     total =
-      Enum.reduce get_negative_words, 0, fn word, acc ->
-        if test_word(review.body, word), do: acc + 1, else: acc
+      Enum.reduce get_negative_words(), 0, fn word, acc ->
+        if test_word(review.body, word), do: acc + 2, else: acc
       end
-
       %Review{review | score: score - total}
   end
 
   def get_negative_words() do
     {:ok, body } = File.read("words.json")
     {:ok, json } = Poison.decode(body)
-    words = json["negativeWords"]
+    json["negativeWords"]
   end
 
   def score_exclamations(%Review{score: score} = review) do

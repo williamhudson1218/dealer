@@ -1,9 +1,8 @@
 defmodule Dealer do
-  import Meeseeks.CSS
   alias Dealer.Reviews
   alias Dealer.Scores
 
-  def get() do
+  def get_reviews() do
     IO.puts("Fetching Reviews...")
     Reviews.get_reviews()
     |> Reviews.parse_reviews
