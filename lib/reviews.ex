@@ -2,9 +2,13 @@ defmodule Dealer.Reviews do
   import Meeseeks.CSS
   alias Dealer.Review
 
-  def parse_reviews(review_list) do
-    for review <- review_list do
-      parse_review(review)
+  def parse_reviews(html_page_list) do
+    IO.puts("+++++++++++++++")
+    Enum.each html_page_list, fn {key, review_list} ->
+      IO.inspect(review_list)
+      for review <- review_list do
+        #parse_review(review)
+      end
     end
   end
 
@@ -19,6 +23,7 @@ defmodule Dealer.Reviews do
   end
 
   def parse_username(%Review{html: html} = review) do
+    IO.inspect(html)
     username =
       html
       |> Meeseeks.one(css(".font-18"))

@@ -7,22 +7,18 @@ defmodule Dealer do
     IO.puts("Fetching Reviews...")
     get_reviews()
     |> Reviews.parse_reviews
-    |> Scores.calculate_scores
-    |> print_reviews_to_console
+    #|> Scores.calculate_scores
+    #|> print_reviews_to_console
   end
 
   def get_reviews do
-    # for i <- 1..5 do
-    case HTTPoison.get(Application.get_env(:dealer, :url)) do
-    {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-      reviews =
-        body
-        |> Meeseeks.parse
-        |> Meeseeks.all(css(".review-entry"))
-    end
+    reviews =
+     Enum.reduce 1..5, %{}, fn x, acc ->
+      Map.put(acc, x, get_review_html_page())
+     end
   end
 
-  def get_review_document() do
+  def get_review_html_page() do
     case HTTPoison.get(Application.get_env(:dealer, :url)) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         reviews =
