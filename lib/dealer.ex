@@ -1,13 +1,14 @@
 defmodule Dealer do
+  import Meeseeks.CSS
   alias Dealer.Reviews
   alias Dealer.Scores
 
   def get() do
     IO.puts("Fetching Reviews...")
-    reviews = get_reviews()
+    get_reviews()
     |> Reviews.parse_reviews
     |> Scores.calculate_scores
-    #|> print_reviews_to_console
+    |> print_reviews_to_console
   end
 
   def get_reviews do
@@ -21,8 +22,30 @@ defmodule Dealer do
     end
   end
 
-  def print_reviews_to_console(reviews) do
+  def get_review_document() do
+    case HTTPoison.get(Application.get_env(:dealer, :url)) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        reviews =
+          body
+          |> Meeseeks.parse
+          |> Meeseeks.all(css(".review-entry"))
+        end
+  end
 
+  def print_reviews_to_console(reviews) do
+    reviews
+    |> Enum.sort_by(&(&1.score), :asc)
+    |> Enum.drop(Enum.count(reviews) - 3)
+    |> Enum.sort_by(&(&1.score), :desc)
+    |> Enum.each fn review ->
+      IO.puts("Username: #{review.username}")
+      IO.puts("Date: #{review.date}")
+      IO.puts("Rating: #{review.rating}")
+      IO.puts("Title: #{review.title}")
+      IO.puts("Body: #{review.body}")
+      IO.puts("Score: #{review.score}")
+      IO.puts("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    end
   end
 
   def get_floki() do
