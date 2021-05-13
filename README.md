@@ -35,9 +35,6 @@ To exit press `ctrl + c` and then `a` then `enter`
 Enter `mix test` into console
 
 Test Results panel will appear be printed into the console
-
-#Run Tests Windows
-In the menu at the top of the application select -> View -> Test Explorer -> Run All Tests In View
 ```
 
 ## Scoring
