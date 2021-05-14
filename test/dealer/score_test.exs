@@ -1,7 +1,7 @@
-defmodule ScoreTest do
+defmodule DealerTest.ScoreTest do
   use ExUnit.Case
   alias Dealer.Review
-  alias Dealer.Scores
+  alias Dealer.Reviews.Scores
 
 
   defp positive_review() do

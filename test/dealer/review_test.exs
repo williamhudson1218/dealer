@@ -1,4 +1,4 @@
-defmodule ReviewTest do
+defmodule DealerTest.ReviewTest do
   alias Dealer.Reviews
   use ExUnit.Case
 
@@ -11,5 +11,9 @@ defmodule ReviewTest do
     {:ok, html } = File.read("parse_review_not_nil.html")
     review = Reviews.parse_review(html)
     assert review.html != nil
+  end
+
+  test "Parse Review" do
+
   end
 end
