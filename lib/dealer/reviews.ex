@@ -4,7 +4,7 @@ defmodule Dealer.Reviews do
   Review struct so we can sort and display them to the user
   """
   import Meeseeks.CSS
-  alias Dealer.Review
+  alias Dealer.Reviews.Review
   alias Dealer.Reviews.Scores
 
   @doc """
@@ -57,6 +57,7 @@ defmodule Dealer.Reviews do
 
   Returns [%Review{}...]
   """
+  @spec parse_review(String.t()) :: Review.t()
   def parse_review(review_html) do
     review = %Review{html: review_html}
 

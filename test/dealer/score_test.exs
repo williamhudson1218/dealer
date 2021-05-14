@@ -1,6 +1,6 @@
 defmodule DealerTest.ScoreTest do
   use ExUnit.Case
-  alias Dealer.Review
+  alias Dealer.Reviews.Review
   alias Dealer.Reviews.Scores
 
 

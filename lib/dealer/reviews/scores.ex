@@ -1,5 +1,8 @@
 defmodule Dealer.Reviews.Scores do
-  alias Dealer.Review
+  @moduledoc """
+  This module is to handle calculating a score from a %Review{} struct
+  """
+  alias Dealer.Reviews.Review
 
   @spec calculate_scores(any) :: list
   def calculate_scores(reviews) do
