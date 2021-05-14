@@ -10,7 +10,9 @@ defmodule Dealer.Reviews.Scores do
 
   @doc """
   Calculates the score for a %Review{}
+
   The score is a representation of the positivity of the Review
+
   The higher the score the more positive the review
 
   Returns `%Review{}`.

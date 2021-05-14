@@ -3,8 +3,11 @@ defmodule Dealer do
 
   @doc """
   Get's reviews from dealerrater.com
+
   Parses reviews into %Review{} struct
+
   Calculates the score for each review
+
   Prints the scores to console
 
   Returns [:ok]

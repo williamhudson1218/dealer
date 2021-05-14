@@ -86,8 +86,11 @@ defmodule Dealer.Reviews do
 
   @doc """
   Takes in a list of %Review{}'s
+
   Sorts them by their score
+
   Removes all but the best 3 scores
+
   Prints the best 3 scores to the console
 
   Returns `:ok`.
