@@ -26,7 +26,7 @@ Clone the `dealer` repository
 iex -S mix 
 Dealer.get_reviews
 ```
-In console/terminal you will see the 3 most severely positive reviews listed along with the score they were given.
+In console/terminal you will see the 3 most positive reviews listed along with the score they were given.
 
 To exit press `ctrl + c` and then `a` then `enter`
 
