@@ -1,6 +1,6 @@
 # dealer
 
-dealer is a tool used to identify positive reviews from the `dealerrater.com` website. The scoring rules used to determine the most positive reviews are outlined below.
+`dealer` is a tool used to identify positive reviews from the `dealerrater.com` website. The scoring rules used to determine the most positive reviews are outlined below.
 
 ## Installation
 
@@ -8,7 +8,7 @@ Clone the `dealer` repository
 
 *Ensure Elixir is installed on your machine
 
-*If on macOS/Linux, Rust is also required for installation
+*Dealer is dependent on [meeseeks](https://github.com/mischov/meeseeks), which is a library used for parsing html documents. Meeseeks is dependent on the programming language `Rust` and as such will need to be downloaded to run `dealer`. Be sure to add `Rust` to your `PATH` during installation.
 
 [Rust](https://www.rust-lang.org/tools/install)
 
@@ -42,7 +42,7 @@ Test Results will print to the console
 - Rating - The score for rating is calculated by dividing the 1-50 rating by 5. `i.e. 50/5 would be 10 points`
 - `!`'s are awarded 1 point each up to 3 maximum points.
 - Every 100 characters in the body of the review is worth 1 point each for a maximum of 10 points.
-- The appsettings.json file contains an array of both `positiveWords` and `negativeWords`. Each `positiveWord` = +2 points. Each `negativeWord` = -2 points.
+- The `words.json` file contains an array of both `positiveWords` and `negativeWords`. Each `positiveWord` = +2 points. Each `negativeWord` = -2 points.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
