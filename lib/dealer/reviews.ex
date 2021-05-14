@@ -104,9 +104,9 @@ defmodule Dealer.Reviews do
   """
   @spec print_to_console(any) :: :ok
   def print_to_console(reviews) do
-    Enum.sort_by(reviews, & &1.score, :asc)
+    Enum.sort_by(reviews, & &1.score, &<=/2)
     |> Enum.drop(Enum.count(reviews) - 3)
-    |> Enum.sort_by(& &1.score, :desc)
+    |> Enum.sort_by(& &1.score, &>=/2)
     |> Enum.each(fn review ->
       IO.puts("""
       Username: #{review.username}
