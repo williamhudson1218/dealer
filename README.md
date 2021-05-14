@@ -8,7 +8,7 @@ Clone the `dealer` repository
 
 *Ensure Elixir is installed on your machine
 
-*If on macOS/Linux Rust is also required for installation
+*If on macOS/Linux, Rust is also required for installation
 
 [Rust](https://www.rust-lang.org/tools/install)
 
@@ -32,12 +32,11 @@ To exit press `ctrl + c` and then `a` then `enter`
 
 # Run tests
 
-Enter `mix test` into console
+Enter `mix test` into console -> `enter`
 
-Test Results panel will appear be printed into the console
-```
+Test Results will print to the console
 
-## Scoring
+# Scoring
 *Note: Ratings on `dealerrater.com` are on a scale 1-50 and are represented visually to users on a x/5 scale.*
 
 - Rating - The score for rating is calculated by dividing the 1-50 rating by 5. `i.e. 50/5 would be 10 points`
