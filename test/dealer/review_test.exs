@@ -2,18 +2,14 @@ defmodule DealerTest.ReviewTest do
   alias Dealer.Reviews
   use ExUnit.Case
 
-  test "Get Reviews" do
-     reviews = Reviews.get_reviews
-     assert Enum.count(reviews) == 50
-  end
-
-  test "Parse Review Html Not Nil" do
+  test "Parse Review" do
     {:ok, html } = File.read("parse_review_not_nil.html")
     review = Reviews.parse_review(html)
     assert review.html != nil
-  end
-
-  test "Parse Review" do
-
+    assert review.body != nil
+    assert review.title != nil
+    assert review.rating != nil
+    assert review.username != nil
+    assert review.date != nil
   end
 end

@@ -22,4 +22,30 @@ defmodule DealerTest.ScoreTest do
     review = Scores.calculate_score(negative_review())
     assert review.score == 3
   end
+
+  test "Score Rating" do
+    review = %Review{rating: 45}
+    Scores.score_rating(review).score == 9
+  end
+
+  test "Score Positive Words" do
+    review = %Review{body: "Very happy with my service, kind people."}
+    Scores.score_positive_words(review).score == 6
+  end
+
+  test "Score Negative Words" do
+    review = %Review{body: "Salesmen are pushy, staff are slow."}
+    Scores.score_negative_words(review).score == -4
+  end
+
+  test "Score Exclamations" do
+    review = %Review{body: "Good food! Good people! Good Serverice!!"}
+    Scores.score_exclamations(review).score == 3
+  end
+
+  test "Score Length" do
+    review = %Review{body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    "}
+    Scores.score_length(review).score == 5
+  end
 end

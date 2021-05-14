@@ -25,6 +25,7 @@ defmodule Dealer.Reviews.Scores do
       iex> Dealer.Reviews.Scores.calculate_score(%Review{})
 
   """
+  @spec calculate_score(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
   def calculate_score(%Review{} = review) do
     review
     |> score_rating
@@ -34,12 +35,14 @@ defmodule Dealer.Reviews.Scores do
     |> score_length
   end
 
-  defp score_rating(%Review{score: score} = review) do
+  @spec score_rating(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
+  def score_rating(%Review{score: score} = review) do
     total = score + Kernel.trunc(review.rating / 5)
     %Review{review | score: total}
   end
 
-  defp score_positive_words(%Review{score: score} = review) do
+  @spec score_positive_words(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
+  def score_positive_words(%Review{score: score} = review) do
     total =
       Enum.reduce(get_positive_words(), 0, fn word, acc ->
         if test_word(review.body, word), do: acc + 2, else: acc
@@ -53,12 +56,13 @@ defmodule Dealer.Reviews.Scores do
   end
 
   defp get_positive_words() do
-    {:ok, body} = File.read("words.json")
-    {:ok, json} = Poison.decode(body)
+    body = File.read!("words.json")
+    json = Poison.decode!(body)
     json["positiveWords"]
   end
 
-  defp score_negative_words(%Review{score: score} = review) do
+  @spec score_negative_words(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
+  def score_negative_words(%Review{score: score} = review) do
     total =
       Enum.reduce(get_negative_words(), 0, fn word, acc ->
         if test_word(review.body, word), do: acc + 2, else: acc
@@ -68,18 +72,20 @@ defmodule Dealer.Reviews.Scores do
   end
 
   defp get_negative_words() do
-    {:ok, body} = File.read("words.json")
-    {:ok, json} = Poison.decode(body)
+    body = File.read!("words.json")
+    json = Poison.decode!(body)
     json["negativeWords"]
   end
 
-  defp score_exclamations(%Review{score: score} = review) do
+  @spec score_exclamations(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
+  def score_exclamations(%Review{score: score} = review) do
     exclamationCount = review.body |> String.graphemes() |> Enum.count(&(&1 == "!"))
     total = score + if exclamationCount >= 3, do: 3, else: exclamationCount
     %Review{review | score: total}
   end
 
-  defp score_length(%Review{score: score} = review) do
+  @spec score_length(Dealer.Reviews.Review.t()) :: Dealer.Reviews.Review.t()
+  def score_length(%Review{score: score} = review) do
     total =
       score +
         if String.length(review.body) / 100 >= 10,
