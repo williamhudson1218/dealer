@@ -6,9 +6,9 @@
 
 Clone the `dealer` repository
 
-\*Ensure Elixir is installed on your machine
+- Ensure Elixir is installed on your machine
 
-\*Dealer is dependent on [meeseeks](https://github.com/mischov/meeseeks), which is a library used for parsing html documents.
+- Dealer is dependent on [meeseeks](https://github.com/mischov/meeseeks), which is a library used for parsing html documents.
 
 [Elixir](https://elixir-lang.org/install.html)
 
