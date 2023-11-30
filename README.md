@@ -10,8 +10,6 @@ Clone the `dealer` repository
 
 \*Dealer is dependent on [meeseeks](https://github.com/mischov/meeseeks), which is a library used for parsing html documents.
 
-[Rust](https://www.rust-lang.org/tools/install)
-
 [Elixir](https://elixir-lang.org/install.html)
 
 ## Usage
