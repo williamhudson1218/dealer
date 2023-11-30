@@ -16,7 +16,7 @@ Clone the `dealer` repository
 
 # To run console application
 
-- Open terminal/console and navigate to the directory where `dealer` is cloned
+- Open terminal/console and navigate to the `dealer` directory
 - Run `mix.deps get` to install dependencies
 - Run the following commands
 
@@ -31,7 +31,7 @@ To exit press `ctrl + c` and then `a` then `enter`
 
 # Run tests
 
-Enter `mix test` into console -> `enter`
+Run command `mix test`
 
 Test Results will print to the console
 
