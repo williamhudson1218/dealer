@@ -23,7 +23,7 @@ defmodule Dealer.MixProject do
     [
       {:httpoison, "~> 1.8.0"},
       {:floki, "~> 0.30.1"},
-      {:meeseeks, "~> 0.15.1"},
+      {:meeseeks, "~> 0.17"},
       {:json, "~> 1.4"},
       {:poison, "~> 3.1"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}

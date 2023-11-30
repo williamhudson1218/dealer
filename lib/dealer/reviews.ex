@@ -37,6 +37,9 @@ defmodule Dealer.Reviews do
           body
           |> Meeseeks.parse()
           |> Meeseeks.all(css(".review-entry"))
+
+      error ->
+        IO.puts("Error fetching html page. #{error}")
     end
   end
 
@@ -122,7 +125,8 @@ defmodule Dealer.Reviews do
   defp parse_username(%Review{html: html} = review) do
     username =
       html
-      |> Meeseeks.one(css(".font-18"))
+      |> Meeseeks.one(css(".line-height-150"))
+      |> Meeseeks.one(css(".notranslate"))
       |> Meeseeks.text()
       |> String.trim_leading("- ")
 
@@ -132,7 +136,7 @@ defmodule Dealer.Reviews do
   defp parse_title(%Review{html: html} = review) do
     title =
       html
-      |> Meeseeks.one(css(".no-format"))
+      |> Meeseeks.one(css(".review-title"))
       |> Meeseeks.text()
 
     %Review{review | title: title}
@@ -141,7 +145,7 @@ defmodule Dealer.Reviews do
   defp parse_body(%Review{html: html} = review) do
     body =
       html
-      |> Meeseeks.one(css(".review-content"))
+      |> Meeseeks.one(css(".review-whole"))
       |> Meeseeks.text()
 
     %Review{review | body: body}
@@ -155,6 +159,7 @@ defmodule Dealer.Reviews do
 
     {index, _count} = :binary.match(ratingHtml, "pull-right")
     {rating, _} = Integer.parse(String.slice(ratingHtml, index - 3, 2))
+
     %Review{review | rating: rating}
   end
 
